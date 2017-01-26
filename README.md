@@ -1,5 +1,5 @@
 
-# TooDoo : the to-do application
+# TooDoo : the Todo manage application
 
 this is the project for studying Android and Node.JS
 
@@ -23,11 +23,15 @@ Node.js API Server
 ## Node Server
 
 **install**
+```
+cd Server && npm install
 
-\`cd Server && npm install\`
+```
 
 **start**
 
-\`npm start\`
 
-***
+```
+npm start
+
+```
