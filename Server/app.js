@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const index = require('./routes/index');
 const api = require('./routes/api');
@@ -23,6 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api', api);
+
+
+var db = mongoose.connect(config.db);
+mongoose.connection.on('connected', function () {
+  console.log('Mongoose default connection open to ' + config.db);
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

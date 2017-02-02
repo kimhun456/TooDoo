@@ -1,8 +1,7 @@
 
 const config = {
     port : normalizePort(process.env.PORT || '3000'),
-    mongoDBurl : "",
-    mongoDBPort : 27017
+	  db: process.env.MONGOLAB_URI || "mongodb://localhost/toodoo"
 }
 
 /**
