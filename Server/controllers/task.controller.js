@@ -13,7 +13,7 @@ const TaskController = function(Task){
 		});
     }
 
-    TaskObj.getTask = function(req,res,next){
+    TaskObj.GetTask = function(req,res,next){
         Task.find(function(err, tasks){
 			if(err) {
 				res.json({status: false, error: "Something went wrong"});
