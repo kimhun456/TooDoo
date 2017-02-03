@@ -1,10 +1,9 @@
-var express = require('express');
-var router = express.Router();
-
+const express = require('express');
 const Task = require('../../models/task.model');
 const Project = require('../../models/project.model');
 const ProjectController = require('../../controllers/project.controller')(Project, Task);
 
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', ProjectController.GetProject);
