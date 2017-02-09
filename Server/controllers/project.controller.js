@@ -1,58 +1,57 @@
-const ProjectController = function(Project, Task){
 
-    var ProjectObj = {};
+/**
+ * Controller for Prjoect Manage
+ * @return the object has basic RESTFUL functions.
+ */
+const ProjectController = (Project) => {
+  const ProjectObj = {};
 
-    var obj = {
-        title : "example"
-    };
+  ProjectObj.PostProject = (req, res) => {
+    const newProject = new Project(req.body);
+    newProject.save((err, project) => {
+      if (err) {
+        res.status(500).json({ status: false, error: err.message });
+        return;
+      }
+      res.json({ status: true, project });
+    });
+  };
 
+  ProjectObj.GetProject = (req, res) => {
+    Project.find((err, projects) => {
+      if (err) {
+        res.status(500).json({ status: false, error: err.message });
+      }
+      res.json({ status: true, projects });
+      return projects;
+    });
+  };
 
-    ProjectObj.PostProject = function(req,res,next){
-        var newProject = new Project(obj);
-		newProject.save(function(err, project){
-			if(err){
-                res.status(500).json({status: false, error: err.message});
-                console.log("PostProject is not successfull")
-				return;
-			}
-            res.json({status: true, project: project});
-		});
-    }
+  ProjectObj.UpdateProject = (req, res) => {
+    Project.findById(req.body.id, (err, project) => {
+      const modifiedProject = project;
+      modifiedProject.shared_accounts = req.body.shared_accounts;
+      modifiedProject.save((error) => {
+        if (error) {
+          res.status(500).json({ status: false, error: err.message });
+        }
+        res.json({
+          status: true,
+          message: 'Status updated successfully',
+        });
+      });
+    });
+  };
 
-    ProjectObj.GetProject = function(req,res,next){
-        Project.find(function(err, projects){
-			if(err) {
-				res.status(500).json({status: false, error: err.message});
-                console.log("GetProject is not successfull")
-				return;
-			}
-			res.json({status: true, projects: projects});
-		});
-    }
+  ProjectObj.DeleteProject = (req, res) => {
+    Project.remove({ _id: req.body.id }, (err) => {
+      if (err) {
+        res.status(500).json({ status: false, error: err.message });
+      }
+      res.json({ status: true, message: 'Todo deleted successfully' });
+    });
+  };
+  return ProjectObj;
+};
 
-    ProjectObj.UpdateProject = function(req,res,next){
-		Project.findById(req.body._id, function(err, project){
-			project.save(function(err, project){
-				if(err) {
-					res.status(500).json({status: false, error: err.message});
-                    console.log("Update Project is not successfull")
-				}
-				res.json({status: true, message: "Status updated successfully"});
-			});
-		});
-
-    }
-
-    ProjectObj.DeleteProject = function(req,res,next){
-        Project.remove({_id : req.body._id }, function(err, todos){
-			if(err) {
-				res.status(500).json({status: false, error: err.message});
-                console.log("Deleting Project is not successfull");
-			}
-			res.json({status: true, message: "Todo deleted successfully"});
-		});
-    }
-    return ProjectObj;
-}
-
-module.exports =  ProjectController;
+module.exports = ProjectController;

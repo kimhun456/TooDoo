@@ -38,7 +38,7 @@ const TaskController = (Task) => {
   };
 
   TaskObj.DeleteTask = (req, res) => {
-    Task.remove({ _id: req.body.id }, (err, todos) => {
+    Task.remove({ _id: req.body.id }, (err) => {
       if (err) {
         res.json({ status: false, error: 'Deleting todo is not successfull' });
       }

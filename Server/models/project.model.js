@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-
+/**
+ * Prjoect is Collection of the tasks.
+ * it has own id and shared_user.
+ */
 const projectSchema = Schema({
   title: { type: String, default: 'Primary' },
   registered: { type: Date, default: Date.now },
