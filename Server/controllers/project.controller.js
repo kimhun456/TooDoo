@@ -1,4 +1,3 @@
-
 /**
  * Controller for Prjoect Manage
  * @return the object has basic RESTFUL functions.
@@ -30,7 +29,7 @@ const ProjectController = (Project) => {
   ProjectObj.UpdateProject = (req, res) => {
     Project.findById(req.body.id, (err, project) => {
       const modifiedProject = project;
-      modifiedProject.shared_accounts = req.body.shared_accounts;
+      modifiedProject.sharedAccounts = req.body.sharedAccounts;
       modifiedProject.save((error) => {
         if (error) {
           res.status(500).json({ status: false, error: err.message });

@@ -1,15 +1,8 @@
-
-const config = {
-    port : normalizePort(process.env.PORT || '3000'),
-	  db: process.env.MONGOLAB_URI || "mongodb://localhost/toodoo"
-}
-
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -20,8 +13,12 @@ function normalizePort(val) {
     // port number
     return port;
   }
-
   return false;
 }
+
+const config = {
+  port: normalizePort(process.env.PORT || '3000'),
+  db: process.env.MONGOLAB_URI || 'mongodb://localhost/toodoo',
+};
 
 module.exports = config;

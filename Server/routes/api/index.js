@@ -6,9 +6,8 @@ const task = require('./task');
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.send('route to API');
-  next();
 });
 
 // route the  api

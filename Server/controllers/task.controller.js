@@ -27,7 +27,7 @@ const TaskController = (Task) => {
   TaskObj.UpdateTask = (req, res) => {
     Task.findById(req.body.id, (err, task) => {
       const result = task;
-      result.is_completed = req.body.is_completed;
+      result.isCompleted = req.body.isCompleted;
       result.save((error) => {
         if (error) {
           res.json({ status: false, error: 'Status not updated' });
